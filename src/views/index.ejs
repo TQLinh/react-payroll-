@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/upload">upload file</a>
+    </div>
+    <div style="padding-left: 16px">
+      <h1>hello nodejs base</h1>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% dataUser.forEach((item)=>{ %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.firstName %></td>
+            <td><%= item.lastName %></td>
+            <td><%= item.email %></td>
+            <td><%= item.address %></td>
+            <td>
+              <a href="/detail/user/<%= item.id %>">detail</a>
+              <form action="/delete-user" method="post">
+                <input
+                  type="text"
+                  hidden
+                  value="<%= item.id %>"
+                  name="userId"
+                />
+                <button type="submit">Delete</button>
+              </form>
+              <form action="/edit-user/<%= item.id %>" method="get">
+                <button type="submit">edit</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+          <!-- and so on... -->
+        </tbody>
+      </table>
+    </div>
+    <form
+      action="/create-new-user"
+      method="post"
+      style="display: flex; flex-direction: column; align-items: center"
+    >
+      <h1>Create a new user:</h1>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div>
+          <div>
+            <label for="">firstName:</label>
+            <input type="text" placeholder="enter firstName" name="firstname" />
+          </div>
+          <div>
+            <label for="">lastName:</label>
+            <input type="text" placeholder="enter lastName" name="lastname" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <label for="">Email:</label>
+            <input type="email" placeholder="enter Email" name="email" />
+          </div>
+          <div>
+            <label for="">addRess:</label>
+            <input type="text" placeholder="enter addRess" name="address" />
+          </div>
+        </div>
+      </div>
+      <div><button type="submit">submit</button></div>
+    </form>
+    <!-- <%= dataUser %> -->
+  </body>
+</html>
